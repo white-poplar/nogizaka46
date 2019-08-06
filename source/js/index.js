@@ -128,6 +128,7 @@ function present() {
     $("#totaltime").html(s_to_hs(parseInt(Audio46.duration)));
 }
 $(".basebar").mousedown(function (ev) {
+    console.log("aaaa");
     var posX = ev.offsetX;
     var basebarwidth = $(".basebar").width();
     var percentage = (posX) / basebarwidth * 100;

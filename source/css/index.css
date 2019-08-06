@@ -37,7 +37,6 @@ a,a:hover {
     margin: 3% auto 0 auto;
 }
 .frame {
-    width: 100%;
     background: #fff;
     border-radius: 5px;
     overflow: hidden;
@@ -45,18 +44,17 @@ a,a:hover {
     padding: 5px;
     margin: 12px 0 12px 0;
     min-height: 40px;
+    position: relative;
 }
 #share {
     position: absolute;
-    height: 10%;
-    width: 100%;
     z-index: 999;
+    float: right;
+    top: 5%;
+    right: 5%;
 }
 #share i {
     color: #7d2981;
-    float: right;
-    margin-right: 4%;
-    margin-top: 4%;
     font-size: 20px;
     cursor: pointer;
 }
