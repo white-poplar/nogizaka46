@@ -33,13 +33,13 @@ var func = {
     },
     repeat:function () {
         isRandom = false;
-        $("#repeat i").css("opacity",0.5);
-        $("#random i").css("opacity",1);
+        $("#repeat i").css("color","#ccc");
+        $("#random i").css("color","#333");
     },
     random:function () {
         isRandom = true;
-        $("#repeat i").css("opacity",1);
-        $("#random i").css("opacity",0.5);
+        $("#repeat i").css("color","#333");
+        $("#random i").css("color","#ccc");
     },
     backward: function () {
         if(palyCount === 0) return;
