@@ -95,10 +95,26 @@ $("#random").click(function () {
     func.random();
 });
 $("#backward").click(function () {
+    $("#backward").addClass("disable");
+    $("#forward").addClass("disable");
+
     func.backward();
+
+    setTimeout(function(){
+        $("#backward").removeClass("disable");
+        $("#forward").removeClass("disable");
+    },2000);
 });
 $("#forward").click(function () {
+    $("#backward").addClass("disable");
+    $("#forward").addClass("disable");
+
     func.forward();
+
+    setTimeout(function(){
+        $("#backward").removeClass("disable");
+        $("#forward").removeClass("disable");
+    },2000);
 });
 
 // 进度条

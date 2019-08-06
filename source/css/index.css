@@ -267,3 +267,6 @@ a,a:hover {
 #copyright {
     margin: 20px 0 10px 0;
 }
+.disable {
+    pointer-events: none;
+}
