@@ -1,9 +1,3 @@
-function GetQueryString(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return decodeURI(r[2]);
-    return null;
-}
 function s_to_hs(s) {
     var h = Math.floor(s / 60);
     s = s % 60;
@@ -17,36 +11,102 @@ function s_to_hs(s) {
     return h + ':' + s;
 }
 
-var Audio46 = $("#player")[0];
-var angle = 0;
-var delta = 0;
+var isRandom = true,palyCount = 0,playList = [],palyId = -1;
+var domain = "//cdn.white-poplar.work/nogizaka46/";
+var Audio46 = $("#player")[0],angle = 0,delta = 0;
+var hmtArr = [],hmt="";
 Audio46.src = "";
 
-// 播放状态
-function play() {
-    Audio46.play();
-    $("#play").html('<i class="fa fa-pause fa-1x fa-fw"></i>暂停');
-    delta = 0.2;
-}
-function pause() {
-    Audio46.pause();
-    $("#play").html('<i class="fa fa-play fa-1x fa-fw"></i>播放');
-    delta = 0;
-}
-function turnonoff() {
-    if (Audio46.paused) {
-        play();
-    } else {
-        pause();
+var func = {
+    play:function () {
+        Audio46.play().catch(function (e) {
+            $("#onoff").html('<i class="fa fa-play fa-3x"></i>');
+            delta = 0;
+        });
+        $("#onoff").html('<i class="fa fa-pause fa-3x"></i>');
+        delta = 0.2;
+    },
+    pause:function () {
+        Audio46.pause();
+        $("#onoff").html('<i class="fa fa-play fa-3x"></i>');
+        delta = 0;
+    },
+    repeat:function () {
+        isRandom = false;
+        $("#repeat i").css("opacity",0.5);
+        $("#random i").css("opacity",1);
+    },
+    random:function () {
+        isRandom = true;
+        $("#repeat i").css("opacity",1);
+        $("#random i").css("opacity",0.5);
+    },
+    backward: function () {
+        if(palyCount === 0) return;
+        if(isRandom){
+            func.playGo(Math.floor(Math.random()*parseInt(palyCount)));
+        }else{
+            if(palyId <= 0)
+                palyId = palyCount - 1;
+            else
+                palyId -= 1;
+            if(palyId > palyCount)
+                palyId = palyCount - 1;
+            func.playGo(palyId);
+        }
+    },
+    forward: function () {
+        if(palyCount === 0) return;
+        if(isRandom){
+            func.playGo(Math.floor(Math.random()*parseInt(palyCount)));
+        }else{
+            if(palyId < 0 || palyId === palyCount - 1)
+                palyId = 0;
+            else
+                palyId += 1;
+            if(palyId > palyCount)
+                palyId = 0;
+            func.playGo(palyId);
+        }
+    },
+    playGo: function (id) {
+        palyId = id;
+        hmtArr = playList[palyId].split('/');
+        $("#title").text(hmtArr[2].slice(3));
+        $("#subtitle").text("《" + hmtArr[0] + "》");
+        $(document).attr("title", hmtArr[2].slice(3) + " - 命美");
+        $("#img").attr("src", domain + hmtArr[0] + "/" + Math.floor(Math.random()*parseInt(hmtArr[1]) + 1) + ".jpg");
+        Audio46.src = domain + hmtArr[0] + "/" + hmtArr[2] + ".mp3";
+        func.play();
+        hmt = "?hmt=" + hmtArr[0]+"/" + hmtArr[1] + "/" + hmtArr[2];
     }
-}
+};
+$("#onoff").click(function () {
+    if (Audio46.paused) {
+        func.play();
+    } else {
+        func.pause();
+    }
+});
+$("#repeat").click(function () {
+    func.repeat();
+});
+$("#random").click(function () {
+    func.random();
+});
+$("#backward").click(function () {
+    func.backward();
+});
+$("#forward").click(function () {
+    func.forward();
+});
 
 // 进度条
 function present() {
     var length = Audio46.currentTime / Audio46.duration * 100;
     $('.progressbar').width(length + '%');
     if (Audio46.ended || Audio46.currentTime == Audio46.duration) {
-        Audio46.play();
+        func.forward();
     }
     $("#currenttime").html(s_to_hs(parseInt(Audio46.currentTime)));
     $("#totaltime").html(s_to_hs(parseInt(Audio46.duration)));
@@ -63,49 +123,98 @@ setInterval(function () {
     $('#img').rotate(angle);
 }, 15);
 
-$(function(){
+$(function () {
+    var currentDate = new Date();
+    var hour = currentDate.getHours();
+    setTimeout(function () {
+        if (hour >= 6 && hour <= 10) {
+            $("#hello").html("早安！").fadeIn(1000);
+            $("#hello").slideDown(1000);
+            $("#hello").delay(2000).slideUp("slow");
+        }
+        else if (hour >= 21 || hour <= 4) {
+            $("#hello").html("晚安！").fadeIn(1000);
+            $("#hello").slideDown(1000);
+            $("#hello").delay(2000).slideUp("slow");
+        }
+    }, 1000);
 
-    // 微信验证
-    var isWeixin = navigator.userAgent.toLowerCase().indexOf('micromessenger') != -1;
-    if (isWeixin) {
-        $(".tips").show();
-    } else {
-        $(".tips").hide();
-    }
+    var init_music_image = "//cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/4.jpg";
+    $("#img").attr("src", init_music_image);
 
-    // main
-    var hmt = GetQueryString("hmt");
+    var init_music_src = "//cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/01%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84.mp3";
+    Audio46.src = init_music_src;
 
-    if(hmt == null || hmt.split('/').length != 3){
-        var init_music_image = "//cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/4.jpg";
-        $("#background").css("background-image", "url('" + init_music_image + "')");
-        $("#img").attr("src", init_music_image);
+    hmt = "?hmt=11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/4/01%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84";
 
-        var init_music_src = "//cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/01%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84.mp3";
-        Audio46.src = init_music_src;
-        $("#download").attr("href", init_music_src).attr("download", "命は美しい.mp3");
-        return;
-    }
+    var data = {"data":eval(decodeURIComponent(escape(atob(source))))};
+    $("#accordion").empty();
+    $('#accordion').html(template('albumTemp', data));
+    var Accordion = function (el, multiple) {
+        this.el = el || {};
+        this.multiple = multiple || false;
+        var links = this.el.find('.album');
+        links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown);
+    };
+    Accordion.prototype.dropdown = function (e) {
+        var $el = e.data.el;
+        $this = $(this), $next = $this.next();
+        $next.slideToggle();
+        $this.parent().toggleClass('open');
+        if (!e.data.multiple) {
+            $el.find('.song').not($next).slideUp().parent().removeClass('open');
+        }
+    };
+    new Accordion($('#accordion'), false);
 
-    var hmtArr = hmt.split('/');
-    var music_album = hmtArr[0];
-    var music_src = hmtArr[2];
-    var music_name = music_src.replace(".mp3", "").replace(".flac", "").replace(".m4a", "").replace(".wav", "").slice(3);
-    var music_image = hmtArr[1];
+    $.each(data.data, function(i, album){
+        $.each(album.song,function (j,song) {
+            playList.push(album.album + "/" + album.cover + "/" + song);
+        });
+    });
+    palyCount = playList.length;
 
-    $("#title").text(music_name);
-    $("#subtitle").text("《" + music_album + "》");
-    $(document).attr("title", music_name + " - 命美");
+    $("#randomall").bind("click", function () {
+        $.each(data.data, function(i, album){
+            $.each(album.song,function (j,song) {
+                playList.push(album.album + "/" + album.cover + "/" + song);
+            });
+        });
+        palyCount = playList.length;
+        isRandom = true;
+        func.forward();
+    });
 
-    var domain = "//cdn.white-poplar.work/nogizaka46/";
+    $("a.playall").bind("click", function () {
+        var _albumname = this.getAttribute("albumname");
+        var _album = data.data.find(function(x) {
+            return x.album === _albumname;
+        });
+        if(_album != null){
+            playList = [];
+            $.each(_album.song,function (j,song) {
+                playList.push(_album.album + "/" + _album.cover + "/" + song);
+            });
+            palyCount = playList.length;
+            func.forward();
+        }
+    });
 
-    var music_image_src = domain + music_album + "/" + Math.floor(Math.random()*parseInt(music_image) + 1) + ".jpg";
-    $("#background").css("background-image", "url('" + music_image_src + "')");
-    $("#img").attr("src", music_image_src);
+    $("a.playsong").bind("click", function () {
+        var _songname = this.getAttribute("data-src");
 
-    var music_file_src = domain + music_album + "/" + music_src;
-    Audio46.src = music_file_src;
-    $("#download").attr("href", music_file_src).attr("download", music_src.slice(3));
+        palyId = 0;
+        hmtArr = _songname.split('/');
+        $("#title").text(hmtArr[2].slice(3));
+        $("#subtitle").text("《" + hmtArr[0] + "》");
+        $(document).attr("title", hmtArr[2].slice(3) + " - 命美");
+        $("#img").attr("src", domain + hmtArr[0] + "/" + Math.floor(Math.random()*parseInt(hmtArr[1]) + 1) + ".jpg");
+        Audio46.src = domain + hmtArr[0] + "/" + hmtArr[2] + ".mp3";
+        func.play();
+        hmt = "?hmt=" + hmtArr[0]+"/" + hmtArr[1] + "/" + hmtArr[2];
+    });
 
-    setTimeout(play(),2500);
+    $("#share i").bind("click", function () {
+        location.href = "share.html" + hmt;
+    });
 });

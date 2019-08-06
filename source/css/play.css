@@ -1,4 +1,8 @@
 @charset "utf-8";
+*{
+    -webkit-tap-highlight-color: rgba(255,0,0,0);
+    -webkit-appearance:none;
+}
 html,body {
     color: #333;
     height: 100%;
@@ -9,7 +13,7 @@ html,body {
     text-rendering: optimizelegibility;
 }
 body {
-    background-image: linear-gradient(to bottom , #392C24, #2A211D);
+    background-image: linear-gradient(to bottom , #ccc,#392C24);
 }
 a,a:hover {
     color: #7d2981;
@@ -29,19 +33,19 @@ a,a:hover {
     filter: blur(5vw);
     background-size: cover;
     overflow: hidden;
-    background: url(//cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/4.jpg) no-repeat;
+    background-repeat: no-repeat;
     background-size: cover;
 }
 #wrapper {
     max-width: 960px;
     margin: 0 auto;
     height: 100%;
-    background-image: url(../img/cd.png);
-    background-size: 320px 320px;
-    background-repeat: repeat;
+    /*background-image: url(../img/cd.png);*/
+    /*background-size: 320px 320px;*/
+    /*background-repeat: repeat;*/
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 4px #999;
+    /*box-shadow: 0 0 4px #999;*/
     text-align: center;
 }
 
@@ -182,6 +186,7 @@ a,a:hover {
     color: #fff;
     text-shadow: 0 0 3px #111;
     bottom: 120px;
+    display: none;
 }
 
 #basebar {
@@ -203,6 +208,7 @@ a,a:hover {
     position: relative;
     z-index: 3;
     box-shadow: 0 0 1px #666;
+    cursor: pointer;
 }
 .basebar .progressbar {
     display: block;
@@ -227,7 +233,7 @@ a,a:hover {
     text-shadow: 0 0 3px #111;
 }
 #currenttime {
-float: left
+    float: left
 }
 #totaltime {
     float: right
@@ -240,11 +246,11 @@ float: left
     width: 40%;
     margin-left: 5%;
     margin-right: 5%;
-    font-size: 20px;
+    font-size: 16px;
     border-radius: 19px;
     background-color: rgba(0, 0, 0, 0);
     border: 2px solid #7d2981;
-    cursor: pointer;
+    letter-spacing:2px;
 }
 #control {
     position: fixed;
