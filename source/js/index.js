@@ -162,7 +162,7 @@ $(function () {
     var init_music_src = "//cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/01%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84.mp3";
     Audio46.src = init_music_src;
 
-    hmt = "?hmt=11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/4/01%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84";
+    hmt = "11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/4/01%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84";
 
     var data = {"data":eval(decodeURIComponent(escape(atob(source))))};
     $("#accordion").empty();
@@ -228,10 +228,10 @@ $(function () {
         $("#img").attr("src", domain + hmtArr[0] + "/" + Math.floor(Math.random()*parseInt(hmtArr[1]) + 1) + ".jpg");
         Audio46.src = domain + hmtArr[0] + "/" + hmtArr[2] + ".mp3";
         func.play();
-        hmt = "?hmt=" + hmtArr[0]+"/" + hmtArr[1] + "/" + hmtArr[2];
+        hmt = hmtArr[0]+"/" + hmtArr[1] + "/" + hmtArr[2];
     });
 
     $("#share i").bind("click", function () {
-        location.href = "share.html" + hmt;
+        location.href = "share.html?hmt=" + encodeURIComponent(hmt);
     });
 });
