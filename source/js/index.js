@@ -78,7 +78,7 @@ var func = {
         $("#img").attr("src", domain + hmtArr[0] + "/" + Math.floor(Math.random()*parseInt(hmtArr[1]) + 1) + ".jpg");
         Audio46.src = domain + hmtArr[0] + "/" + hmtArr[2] + ".mp3";
         func.play();
-        hmt = "?hmt=" + hmtArr[0]+"/" + hmtArr[1] + "/" + hmtArr[2];
+        hmt = hmtArr[0]+"/" + hmtArr[1] + "/" + hmtArr[2];
     }
 };
 $("#onoff").click(function () {
