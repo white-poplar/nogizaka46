@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="initmusic" id="-1" music=" ">
+    <link rel="icon" href="images/axe.jpg">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>命美</title>
+    <script src="jquery-3.4.1.min.js" charset="UTF-8"></script>
+    <script src="jquery.rotate.min.js"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        button {
+            margin: 0;
+            padding: 0;
+            border: 0px solid transparent;
+            color: transparent;
+            outline: none;
+            height: 50px;
+        }
+
+        html, body {
+            background: #f1f1f1;
+            height: 100%;
+            font-family: "PingFang SC", 微软雅黑, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        #wrapper {
+            width: 94%;
+            max-width: 1024px;
+            background: #ffffff;
+            position: relative;
+            margin-top: 3%;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0px 0px 4px #999;
+            text-align: center;
+        }
+
+        #share {
+            position: absolute;
+            height: 10%;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        #share i {
+            color: #000;
+            float: right;
+            margin-right: 4%;
+            margin-top: 5%;
+
+        }
+
+        #download {
+            width: 94%;
+            max-width: 1024px;
+            margin-top: 20px;
+
+            background: #ffffff;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0px 0px 4px #999;
+            text-align: center;
+            padding-top: 15px;
+            padding-bottom: 20px;
+
+        }
+
+        #download img {
+            width: 60%;
+            height: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        #download p {
+            margin-left: 7%;
+            margin-right: 7%;
+            line-height: 1.8em;
+            text-align: justify;
+            text-justify: inter-character;
+        }
+
+        #notice {
+            width: 94%;
+            max-width: 1024px;
+            margin-top: 20px;
+
+            background: #ffffff;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0px 0px 4px #999;
+            text-align: center;
+            padding-top: 15px;
+            padding-bottom: 15px;
+
+        }
+
+        #notice img {
+            width: 80%;
+            height: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        #notice p {
+            margin-left: 7%;
+            margin-right: 7%;
+            line-height: 1.8em;
+            text-align: justify;
+            text-justify: inter-character;
+        }
+
+        #hello {
+            width: 94%;
+            max-width: 1024px;
+            margin-top: 10px;
+
+            background: #ffffff;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0px 0px 4px #999;
+            text-align: center;
+            height: 48px;
+            line-height: 48px;
+            /*padding-top: 18px;*/
+            /*padding-bottom: 18px;*/
+            font-size: 14px;
+            color: #4D4D4D;
+            font-weight: 700;
+
+            font-style: normal;
+        }
+
+        #randomall {
+            width: 94%;
+            max-width: 1024px;
+            margin-top: 10px;
+
+            background: #ffffff;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0px 0px 4px #999;
+            text-align: center;
+            height: 48px;
+            line-height: 48px;
+            /*padding-top: 18px;*/
+            /*padding-bottom: 18px;*/
+            font-size: 14px;
+            color: #4D4D4D;
+            font-weight: 700;
+
+            font-style: normal;
+
+        }
+
+        #randomall:active {
+            box-shadow: 0px 0px 15px #888;
+
+        }
+
+        #cover img {
+            margin-top: 15px;
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 200px;
+            height: 200px;
+            border-radius: 100px;
+            box-shadow: 0px 0px 6px #999;
+
+        }
+
+        #name {
+            /*height: 60px;*/
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .divderline {
+            height: 1px;
+            background-color: #d9d9d9;
+            width: 98%;
+            margin-right: auto;
+            margin-left: auto;
+            border-radius: 1px;
+
+        }
+
+        #control {
+            margin-top: 0px;
+            width: 90%;
+            margin-right: auto;
+            margin-left: auto;
+            height: 80px;
+            /*line-height: 80px;*/
+            vertical-align: middle;
+
+            display: -webkit-flex;
+            display: flex;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+
+        }
+
+        .controlbutton {
+            width: 28%;
+            float: left;
+            color: black;
+            vertical-align: middle;
+        }
+
+        .controlbuttonmini {
+            width: 7%;
+            float: left;
+            color: black;
+            vertical-align: middle;
+        }
+
+        .tips {
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 12px;
+            color: #999999;
+
+        }
+
+        .multitips {
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        #copyright {
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            color: #999999;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        #time {
+            width: 90%;
+            height: 20px;
+            line-height: 20px;
+            font-size: 12px;
+            color: #999999;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #currenttime {
+            float: left;
+        }
+
+        #totaltime {
+            float: right;
+        }
+
+        .basebar {
+            display: block;
+            border: none;
+            width: 90%;
+            height: 4px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-radius: 2px;
+            background-color: #999999;
+            position: relative;
+        }
+
+        .basebar .progressbar {
+            display: block;
+            border: none;
+            width: 1%;
+            height: 4px;
+            border-radius: 2px;
+            background-color: #E24E49;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        a {
+            color: #b63b4d;
+            text-decoration: none;
+        }
+
+        h1 {
+            color: #FFF;
+            font-size: 24px;
+            font-weight: 400;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        h1 a {
+            color: #c12c42;
+            font-size: 16px;
+        }
+
+        .accordion {
+            width: 94%;
+            max-width: 1024px;
+            margin-top: 0;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 0px;
+            background: #ffffff;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 4px #999;
+
+        }
+
+        .accordion .link {
+            cursor: pointer;
+            display: block;
+            padding: 15px 15px 15px 42px;
+            color: #4D4D4D;
+            font-size: 14px;
+            font-weight: 700;
+            border-bottom: 1px solid #CCC;
+            position: relative;
+            -webkit-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+        }
+
+        .accordion li:last-child .link {
+            border-bottom: 0;
+        }
+
+        .accordion li i {
+            position: absolute;
+            top: 14px;
+            left: 12px;
+            font-size: 15px;
+            color: #595959;
+            -webkit-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            font-style: normal;
+        }
+
+        .accordion li i.fa-chevron-down {
+            right: 12px;
+            left: auto;
+            font-size: 16px;
+        }
+
+        .accordion li.open .link {
+            color: #b63b4d;
+        }
+
+        .accordion li.open i {
+            color: #b63b4d;
+        }
+
+        .accordion li.open i.fa-chevron-down {
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+
+        .submenu {
+            display: none;
+            background: #444359;
+            font-size: 14px;
+        }
+
+        .submenu li {
+            border-bottom: 1px solid #4b4a5e;
+        }
+
+        .submenu a {
+            display: block;
+            text-decoration: none;
+            color: #d9d9d9;
+            padding: 12px;
+            padding-left: 42px;
+            -webkit-transition: all 0.25s ease;
+            -o-transition: all 0.25s ease;
+            transition: all 0.25s ease;
+        }
+
+        .submenu a:hover {
+            background: #b63b4d;
+            color: #FFF;
+        }
+
+
+    </style>
+    <script type="text/javascript">
+
+
+    </script>
+
+</head>
+<body>
+<div id="wrapper">
+    <div id="share">
+        <i class="fa fa-share-square-o fa-lg"></i>
+    </div>
+
+    <div id="background">
+        <audio id="player" src=""></audio>
+        <div id="cover">
+            <img id="img" src="images/xixingemian.jpg">
+        </div>
+        <div class="divderline">
+        </div>
+        <div id="name">
+            <div id="title">你离开了南京，从此没有人和我说话</div>
+        </div>
+        <div class="divderline">
+        </div>
+        <span class="basebar">
+            <span class="progressbar"></span>
+        </span>
+        <div id="time">
+            <div id="currenttime">0:00</div>
+            <div id="totaltime">00:00</div>
+        </div>
+
+        <div id="control">
+
+
+            <div id="replay" class="controlbuttonmini" onclick="cityofsky()">
+                <i class="fa fa-bullhorn fa-1x" style="opacity:1;"></i>
+            </div>
+            <div id="last" class="controlbutton" onclick="lastone()">
+                <i class="fa fa-step-backward fa-2x"></i>
+            </div>
+            <div id="onoff" class="controlbutton" onclick="turnonoff()">
+                <i class="fa fa-play fa-3x"></i>
+            </div>
+            <div id="next" class="controlbutton" onclick="nextone()">
+                <i class="fa fa-step-forward fa-2x"></i>
+            </div>
+            <div id="mod" class="controlbuttonmini">
+                <!--                <i class="fa fa-repeat   fa-1x" style="opacity:1;display: none;"></i>-->
+                <img id="mode" onclick="repeatonoff()" src="images/Shuffle.png"
+                     style="width:80%;height: auto;float: left;display: none;">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="hello" >
+
+</div>
+
+<div class="multitips" style="margin-top: 10px">
+    默认随机播放，支持单曲循环，列表可选择播放曲目
+</div>
+<div class="multitips" style="margin-bottom: 10px">
+    右上角分享图标可单曲下载和播放
+</div>
+<ul id="accordion" class="accordion">
+    <li>
+        <div class="link">
+            <i>0</i>
+            <div class="album">加载专辑中……</div>
+            <i class="fa fa-chevron-down"></i>
+        </div>
+        <ul class="submenu">
+            <li><a href="#">加载中……</a></li>
+        </ul>
+    </li>
+</ul>
+<div id="randomall">
+    <i class="fa fa-random fa-x"></i> 全部重新随机播放
+</div>
+<div class="tips">
+    生命如此美丽/命は美しい
+</div>
+<div id="download">
+    <h3>移动端</h3>
+    <div class="divderline" style="margin-top: 10px;margin-bottom: 10px;width: 86%">
+    </div>
+    <div id="downloadqrcode">
+
+        <p>
+            ComingSoon
+            <br>
+        </p>
+
+    </div>
+</div>
+
+<div id="notice">
+    <div id="illustration">
+        <h4>大感谢/ありがとう</h4>
+        <div class="divderline" style="margin-top: 10px;margin-bottom: 10px;width: 86%">
+        </div>
+        <p style="text-indent:2em">
+            Thanks Near、傻魏、sakura由我守护.
+        </p>
+
+        <div class="divderline" style="margin-top: 10px;margin-bottom: 10px;width: 86%">
+        </div>
+        <div>
+            <h4>万物之中，希望至美。至美之物，永不凋零。</h4>
+        </div>
+    </div>
+</div>
+
+<div id="copyright">
+    Powered by 黑莓糖一生推 <i class="fa fa-angellist"></i>
+</div>
+</body>
+<script type="text/javascript">
+    var whetherrepeat = false;
+
+    $("#img").attr("src", 'images/' + Math.floor(Math.random() * 19) + '.jpg');
+
+    var myDate = new Date();
+    hour = myDate.getHours();
+
+    setTimeout(function () {
+        if (hour >= 6 && hour <= 10) {
+            $("#hello").slideDown(1000);
+            $("#hello").html("早安！").fadeIn(3000);
+            $("#hello").delay(3000).slideUp(1000);
+        }
+        if (hour >= 21 || hour <= 4) {
+            $("#hello").slideDown(1000);
+            $("#hello").html("晚安！").fadeIn(3000);
+            $("#hello").delay(3000).slideUp(1000);
+        }
+    }, 1000);
+
+    var path = "http://yoerking.com/static/love/music";
+
+
+    $(function () {
+        var Accordion = function (el, multiple) {
+            this.el = el || {};
+            this.multiple = multiple || false;
+
+            // Variables privadas
+            var links = this.el.find('.link');
+            // Evento
+            links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+        };
+
+        Accordion.prototype.dropdown = function (e) {
+            var $el = e.data.el;
+            $this = $(this),
+                $next = $this.next();
+
+            $next.slideToggle();
+            $this.parent().toggleClass('open');
+
+            if (!e.data.multiple) {
+                $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+            }
+            ;
+        };
+
+        var accordion = new Accordion($('#accordion'), false);
+
+
+        // $("#mode").height($(".fa-1x").height()*1.5);
+        $("#mode").width($(".fa-1x").width() * 1.2);
+        $("#mode").css('display', 'block');
+        //
+        // //
+
+    });
+
+    path = path.replace("love", "b");
+
+
+    function trim(s) {
+        return s.replace(/(^\s*)|(\s*$)/g, "");
+    }
+
+    var musicpath = [];
+    var allmusicpath = [];
+    for (var i in allmuisc) {
+        for (j in allmuisc[i].music) {
+            musicpath.push([path + "/" + allmuisc[i].album + "/" + trim(allmuisc[i].music[j]), trim(allmuisc[i].music[j])]);
+            allmusicpath.push([path + "/" + allmuisc[i].album + "/" + trim(allmuisc[i].music[j]), trim(allmuisc[i].music[j])]);
+        }
+    }
+
+
+    function randomsort(a, b) {
+        return Math.random() > .5 ? -1 : 1;
+    }
+
+    var playlist = [];   //存储播放id
+    for (var i = 0; i < musicpath.length; i++) {
+        playlist.push(i);
+    }
+    playlist.sort(randomsort);
+
+    var myAudio = $("#player")[0];
+
+
+    current_music_id = 0; //当前播放id
+
+
+    current_music_path = musicpath[playlist[current_music_id]][0];//当前播放路径
+    $("#title").text(musicpath[playlist[current_music_id]][1].replace(".mp3", "").replace(".flac", "").replace(".m4a", "").replace(".wav", ""));
+
+    myAudio.src = current_music_path;
+
+
+    function play() {
+        myAudio.play();
+        $("#onoff").html('<i class="fa fa-pause fa-3x"></i>');
+        delta = 0.2;
+    }
+
+    function pause() {
+        myAudio.pause();
+        $("#onoff").html('<i class="fa fa-play fa-3x"></i>');
+        delta = 0;
+
+    }
+
+    function turnonoff() {
+        if (myAudio.paused) { /*如果已经暂停*/
+            play();   //播放
+
+        } else {
+            pause();  //暂停
+        }
+    }
+
+    function repeatonoff() {
+        if (whetherrepeat) {
+            // 如果单曲循环
+            $("#mode").attr("src", "images/Shuffle.png");
+            whetherrepeat = false;
+        } else {
+            // 如果随机播放
+            $("#mode").attr("src", "images/Repeat.png");
+            whetherrepeat = true;
+
+        }
+    }
+
+    function lastone() {
+        if (current_music_id == 0) {
+            current_music_id = musicpath.length - 1;
+        } else {
+            current_music_id -= 1;
+            $("#img").attr("src", 'images/' + Math.floor(Math.random() * 19) + '.jpg');
+
+        }
+        current_music_path = musicpath[playlist[current_music_id]][0];
+        $("#title").text(musicpath[playlist[current_music_id]][1].replace(".mp3", "").replace(".flac", "").replace(".m4a", "").replace(".wav", ""));
+        myAudio.src = current_music_path;
+        play();
+    }
+
+    function nextone() {
+        if (current_music_id == musicpath.length - 1) {
+            current_music_id = 0;
+        } else {
+            current_music_id += 1;
+            $("#img").attr("src", 'images/' + Math.floor(Math.random() * 19) + '.jpg');
+        }
+        current_music_path = musicpath[playlist[current_music_id]][0];
+        $("#title").text(musicpath[playlist[current_music_id]][1].replace(".mp3", "").replace(".flac", "").replace(".m4a", "").replace(".wav", ""));
+        myAudio.src = current_music_path;
+        play();
+    }
+
+    function cityofsky() {
+        myAudio.src = path + "/%E6%9D%8E%E5%BF%97%20-%E7%94%B5%E5%A3%B0%E4%B8%8E%E7%AE%A1%E5%BC%A6%E4%B9%90/12.%E5%9B%9E%E7%AD%94%20(Live)%E6%9D%8E%E5%BF%97.mp3";
+
+        $("#title").text("回答");
+        $("#img").attr("src", 'images/8.jpg');
+        play();
+    }
+
+
+    //进度条控制
+    setInterval(present, 100);  //每0.1秒计算进度条长度
+    $(".basebar").mousedown(function (ev) {  //拖拽进度条控制进度
+        var posX = ev.offsetX;
+        var targetLeft = $(this).offset().left;
+        var basebarwidth = $(".basebar").width();
+        var percentage = (posX) / basebarwidth * 100;
+        myAudio.currentTime = myAudio.duration * percentage / 100;
+    });
+
+    function present() {
+        var length = myAudio.currentTime / myAudio.duration * 100;
+        $('.progressbar').width(length + '%');//设置进度条长度
+
+        if (myAudio.ended || myAudio.currentTime == myAudio.duration) {
+            if (whetherrepeat) {
+                // 如果重复播放，则直接播放
+                myAudio.play();
+                return;
+            } else {
+                // 如果随机，继续下一曲
+                nextone();
+            }
+        }
+        $("#currenttime").html(s_to_hs(parseInt(myAudio.currentTime)));
+        $("#totaltime").html(s_to_hs(parseInt(myAudio.duration)));
+
+    }
+
+    var angle = 0;
+    var delta = 0;
+    setInterval(function () {
+        angle += delta;
+        $('#cover').rotate(angle);
+    }, 40);
+
+    function s_to_hs(s) {
+        //计算分钟
+        //算法：将秒数除以60，然后下舍入，既得到分钟数
+        var h;
+        h = Math.floor(s / 60);
+        //计算秒
+        //算法：取得秒%60的余数，既得到秒数
+        s = s % 60;
+        //将变量转换为字符串
+        h += '';
+        s += '';
+        //如果只有一位数，前面增加一个0
+        h = (h.length == 1) ? '0' + h : h;
+        s = (s.length == 1) ? '0' + s : s;
+        if (isNaN(h)) {
+            return "&infin;"
+        }
+        return h + ':' + s;
+    }
+
+    String.prototype.replaceAll = function (exp, newStr) {
+        return this.replace(new RegExp(exp, "gm"), newStr);
+    };
+    String.prototype.format = function (args) {
+        var result = this;
+        if (arguments.length < 1) {
+            return result;
+        }
+
+        var data = arguments; // 如果模板参数是数组
+        if (arguments.length == 1 && typeof (args) == "object") {
+            // 如果模板参数是对象
+            data = args;
+        }
+        for (var key in data) {
+            var value = data[key];
+            if (undefined != value) {
+                result = result.replaceAll("\\{" + key + "\\}", value);
+            }
+        }
+        return result;
+    };
+
+    function StringFormat() {
+        if (arguments.length == 0)
+            return null;
+        var str = arguments[0];
+        for (var i = 1; i < arguments.length; i++) {
+            var re = new RegExp('\\{' + (i - 1) + '\\}', 'gm');
+            str = str.replace(re, arguments[i]);
+        }
+        return str;
+    }
+
+    $(function () {
+        $("#accordion").empty();
+        var playlisttemp = '';
+        var htmlrender = '<li>' +
+            '<div class="link">' +
+            '<i>{0}</i>' +
+            '<div class="album">{1}</div>' +
+            '<i class="fa fa-chevron-down"></i>' +
+            '</div>' +
+            '<ul class="submenu">' +
+            ' {2}' +
+            '</ul>' +
+            '</li>';
+        for (var i in allmuisc) {
+            var id = i;
+            var albumname = allmuisc[i].album;
+            var lis = "<li><a class='playall' albumname='" + albumname + "' style='text-align: left;  background: #4D4D4D;'>>> 播放全部</a></li>";
+            for (j in allmuisc[i].music) {
+                href = path + "/" + allmuisc[i].album + "/" + trim(allmuisc[i].music[j]);
+                musicname = trim(allmuisc[i].music[j]);
+                lis = lis + '<li><a class="url" hrefsrc="' + href + '">' + musicname + '</a></li>';
+            }
+
+            playlisttemp += htmlrender.format(parseInt(id) + 1, albumname, lis);
+
+        }
+        $("#accordion").append(playlisttemp);
+
+
+        var Accordion = function (el, multiple) {
+            this.el = el || {};
+            this.multiple = multiple || false;
+
+            // Variables privadas
+            var links = this.el.find('.link');
+            // Evento
+            links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+        };
+
+        Accordion.prototype.dropdown = function (e) {
+            var $el = e.data.el;
+            $this = $(this),
+                $next = $this.next();
+
+            $next.slideToggle();
+            $this.parent().toggleClass('open');
+
+            if (!e.data.multiple) {
+                $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+            }
+
+        };
+
+        var accordion = new Accordion($('#accordion'), false);
+
+        $("a.url").bind("click", function () {
+            myAudio.src = this.getAttribute("hrefsrc");
+            $("#title").text(this.innerHTML.replace(".mp3", "").replace(".flac", "").replace(".m4a", "").replace(".wav", ""));
+            $("#img").attr("src", 'images/' + Math.floor(Math.random() * 19) + '.jpg');
+
+            play();
+
+
+        });
+
+        $("a.playall").bind("click", function () {
+
+            var albumname = this.getAttribute("albumname");
+            console.log(albumname);
+            musicpath_new = [];
+            for (var i = 0; i < allmusicpath.length; i++) {
+                if (allmusicpath[i][0].indexOf(albumname) > 0) {
+
+                    musicpath_new.push([path + "/" + albumname + "/" + trim(allmusicpath[i][1]), trim(allmusicpath[i][1])]);
+
+                }
+            }
+
+            //替换新的musicpath
+            musicpath = musicpath_new;
+
+            playlist = [];   //清空playlist
+            //重新添加播放顺序
+            for (var i = 0; i < musicpath.length; i++) {
+                playlist.push(i);
+            }
+
+            current_music_id = 0;
+            current_music_path = musicpath[playlist[current_music_id]][0];//当前播放路径
+            $("#title").text(musicpath[playlist[current_music_id]][1].replace(".mp3", "").replace(".flac", "").replace(".m4a", "").replace(".wav", ""));
+
+            myAudio.src = current_music_path;
+
+            play();
+
+
+        });
+        $("#randomall").bind("click", function () {
+
+            musicpath_new = [];
+            for (var i = 0; i < allmusicpath.length; i++) {
+                musicpath_new.push(allmusicpath[i]);
+
+            }
+
+            //替换新的musicpath
+            musicpath = musicpath_new;
+
+            playlist = [];   //清空playlist
+            //重新添加播放顺序
+            for (var i = 0; i < musicpath.length; i++) {
+                playlist.push(i);
+            }
+            playlist.sort(randomsort);
+            //重置current id和path
+            current_music_id = 0;
+            current_music_path = musicpath[playlist[current_music_id]][0];//当前播放路径
+            $("#title").text(musicpath[playlist[current_music_id]][1].replace(".mp3", "").replace(".flac", "").replace(".m4a", "").replace(".wav", ""));
+            myAudio.src = current_music_path;
+            play();
+        });
+
+        $("#share i").bind("click", function () {
+            console.log("music-share.html?r=" + myAudio.src);
+            window.location = "music-share.html?r=" + myAudio.src;
+        });
+
+    });
+
+    function en(str) {
+        var rep = {
+            '00': '\u200b',
+            '01': '\u200c',
+            '10': '\u200d',
+            '11': '\uFEFF'
+        };
+        str = str.replace(/[^\x00-\xff]/g, function (a) {
+            return escape(a).replace('%', '\\');
+        });
+
+        str = str.replace(/[\s\S]/g, function (a) {
+            a = a.charCodeAt().toString(2);
+            a = a.length < 8 ? Array(9 - a.length).join('0') + a : a;
+            return a.replace(/../g, function (a) {
+                return rep[a];
+            });
+        });
+        return str;
+    }
+
+    function de(str) {
+        return str.replace(/.{4}/g, function (a) {
+            var rep = {"\u200b": "00", "\u200c": "01", "\u200d": "10", "\uFEFF": "11"};
+            return String.fromCharCode(parseInt(a.replace(/./g, function (a) {
+                return rep[a]
+            }), 2))
+        })
+    }
+
+    console.log("%c我爱你们，我爱这个世界！", "color:red");
+    console.log("%cI love you, ZWJ!", "color:red");
+
+
+</script>
+</html>
+
