@@ -12,7 +12,7 @@ function s_to_hs(s) {
 }
 
 var isRandom = true,palyCount = 0,playList = [],palyId = -1;
-var domain = "//cdn.white-poplar.work/nogizaka46/";
+var domain = "http://cdn.white-poplar.work/nogizaka46/";
 var Audio46 = $("#player")[0],angle = 0,delta = 0;
 var hmtArr = [],hmt="";
 Audio46.src = "";
@@ -156,10 +156,10 @@ $(function () {
         }
     }, 1000);
 
-    var init_music_image = "//cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/4.jpg";
+    var init_music_image = "http://cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/4.jpg";
     $("#img").attr("src", init_music_image);
 
-    var init_music_src = "//cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/01%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84.mp3";
+    var init_music_src = "http://cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/01%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84.mp3";
     Audio46.src = init_music_src;
 
     hmt = "11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/4/01%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84";

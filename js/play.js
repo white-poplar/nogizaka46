@@ -80,11 +80,11 @@ $(function(){
     var hmt = decodeURIComponent(GetQueryString("hmt"));
 
     if(hmt == null || hmt.split('/').length != 3){
-        var init_music_image = "//cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/4.jpg";
+        var init_music_image = "http://cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/4.jpg";
         $("#background").css("background-image", "url('" + init_music_image + "')");
         $("#img").attr("src", init_music_image);
 
-        var init_music_src = "//cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/01%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84.mp3";
+        var init_music_src = "http://cdn.white-poplar.work/nogizaka46/11th%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84/01%20%E5%91%BD%E3%81%AF%E7%BE%8E%E3%81%97%E3%81%84.mp3";
         Audio46.src = init_music_src;
         $("#download").attr("href", init_music_src).attr("download", "命は美しい.mp3");
         return;
@@ -100,7 +100,7 @@ $(function(){
     $("#subtitle").text("《" + music_album + "》");
     $(document).attr("title", music_name + " - 命美");
 
-    var domain = "//cdn.white-poplar.work/nogizaka46/";
+    var domain = "http://cdn.white-poplar.work/nogizaka46/";
 
     var music_image_src = domain + music_album + "/" + Math.floor(Math.random()*parseInt(music_image) + 1) + ".jpg";
     $("#background").css("background-image", "url('" + music_image_src + "')");
