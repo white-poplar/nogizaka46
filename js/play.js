@@ -58,7 +58,10 @@ $(".basebar").mousedown(function (ev) {
     var posX = ev.offsetX;
     var basebarwidth = $(".basebar").width();
     var percentage = (posX) / basebarwidth * 100;
-    Audio46.currentTime = Audio46.duration * percentage / 100;
+    var time = Audio46.duration * percentage / 100;
+	if (isFinite(time)) {
+        Audio46.currentTime = time;
+    }
 });
 setInterval(present, 100);
 setInterval(function () {
